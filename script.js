@@ -1,0 +1,516 @@
+/* =========================================================
+   Johnny M. Ortega Jr. — portfolio scripts
+   Vanilla JS, no dependencies.
+   ========================================================= */
+
+(function () {
+  'use strict';
+
+  /* -------------------------------------------------------
+     1. Tools & platforms
+     Primary list = what clients actually care about.
+     Technical list = collapsed behind a disclosure button.
+     ------------------------------------------------------- */
+
+  const PRIMARY_TOOLS = [
+    {
+      group: 'E-commerce & marketplace',
+      tools: [
+        { name: 'Etsy Seller',         initials: 'Et', color: '#F1641E' },
+        { name: 'eBay Seller Hub',     initials: 'eB', color: '#E53238' },
+        { name: 'WooCommerce',         initials: 'Wc', color: '#7F54B3' },
+        { name: 'WordPress',           initials: 'Wp', color: '#21759B' },
+        { name: 'ShipStation',         initials: 'Sh', color: '#2C3E50' },
+        { name: 'Alura',               initials: 'Al', color: '#2E7D6E' },
+        { name: 'EtsyHunt',            initials: 'Eh', color: '#F2711C' },
+        { name: '1688',                initials: '16', color: '#FF6A00' },
+        { name: 'AliExpress',          initials: 'Ae', color: '#E62E04' },
+        { name: 'Elementor',           initials: 'El', color: '#92003B' }
+      ],
+      secondary: [
+        {
+          label: 'Additional platform experience',
+          tools: [
+            { name: 'Amazon Seller Central', initials: 'Am', color: '#232F3E' },
+            { name: 'Walmart Marketplace', initials: 'Wm', color: '#0071CE' },
+            { name: 'Shopee',              initials: 'Sp', color: '#EE4D2D' },
+            { name: 'Lazada',              initials: 'Lz', color: '#0F146D' }
+          ]
+        }
+      ]
+    },
+    {
+      group: 'Operations & productivity',
+      tools: [
+        { name: 'Microsoft Excel',  initials: 'Ex', color: '#217346' },
+        { name: 'Google Sheets',    initials: 'Gs', color: '#0F9D58' },
+        { name: 'Google Workspace', initials: 'Gw', color: '#4285F4' },
+        { name: 'Microsoft 365',    initials: 'Ms', color: '#D83B01' },
+        { name: 'Monday.com',       initials: 'Mo', color: '#FF3D57' },
+        { name: 'Trello',           initials: 'Tr', color: '#0079BF' },
+        { name: 'Slack',            initials: 'Sl', color: '#4A154B' }
+      ],
+      secondary: [
+        {
+          label: 'Additional business tools',
+          tools: [
+            { name: 'HubSpot CRM',      initials: 'Hs', color: '#FF7A59' },
+            { name: 'Zoom',             initials: 'Zm', color: '#2D8CFF' },
+            { name: 'Mailchimp',        initials: 'Mc', color: '#FFE01B', dark: true }
+          ]
+        }
+      ]
+    },
+    {
+      group: 'AI & creative',
+      tools: [
+        { name: 'Canva',              initials: 'Cv', color: '#00C4CC' },
+        { name: 'Adobe Photoshop',    initials: 'Ps', color: '#31A8FF' },
+        { name: 'ChatGPT',            initials: 'Gp', color: '#10A37F' },
+        { name: 'Google AI Studio',   initials: 'Ga', color: '#1A73E8' }
+      ],
+      secondary: [
+        {
+          label: 'Additional creative tools',
+          tools: [
+            { name: 'Adobe Premiere Pro', initials: 'Pr', color: '#00005B' },
+            { name: 'CapCut',             initials: 'Cc', color: '#000000' }
+          ]
+        },
+        {
+          label: 'Additional AI tools',
+          tools: [
+            { name: 'Claude',             initials: 'Cl', color: '#D97757' },
+            { name: 'Google Gemini',      initials: 'Ge', color: '#8E75B2' },
+            { name: 'Microsoft Copilot',  initials: 'Cp', color: '#185ABD' }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const TECHNICAL_TOOLS = [
+    {
+      group: 'IT infrastructure & network support',
+      tools: [
+        { name: 'Windows',     initials: 'Wn', color: '#00A4EF' },
+        { name: 'Linux',       initials: 'Lx', color: '#FCC624', dark: true },
+        { name: 'RingCentral', initials: 'Rc', color: '#FF7A00' },
+        { name: 'pfSense',     initials: 'Pf', color: '#212121' },
+        { name: 'OPNsense',    initials: 'Op', color: '#D94F00' }
+      ]
+    }
+  ];
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function buildPill(t, compact) {
+    const textColor = t.dark ? 'color:#1F2A24;' : '';
+    const liClass = compact ? 'tool-pill tool-pill-compact' : 'tool-pill';
+    return '<li class="' + liClass + '">' +
+             '<span class="badge" style="background:' + t.color + ';' + textColor + '" aria-hidden="true">' +
+               escapeHtml(t.initials) +
+             '</span>' +
+             '<span class="label">' + escapeHtml(t.name) + '</span>' +
+           '</li>';
+  }
+
+  function buildToolGroups(data) {
+    return data.map(function (group) {
+      const pills = group.tools.map(function (t) { return buildPill(t, false); }).join('');
+
+      const secondaryHtml = (group.secondary || []).map(function (sub) {
+        const subPills = sub.tools.map(function (t) { return buildPill(t, true); }).join('');
+        return '<div class="tool-secondary-group">' +
+                 '<p class="tool-secondary-label">' + escapeHtml(sub.label) + '</p>' +
+                 '<ul class="tool-row tool-row-secondary">' + subPills + '</ul>' +
+               '</div>';
+      }).join('');
+
+      return '<div class="tool-group">' +
+               '<h3>' + escapeHtml(group.group) + '</h3>' +
+               '<ul class="tool-row">' + pills + '</ul>' +
+               secondaryHtml +
+             '</div>';
+    }).join('');
+  }
+
+  const toolsRoot = document.getElementById('toolsRoot');
+  if (toolsRoot) toolsRoot.innerHTML = buildToolGroups(PRIMARY_TOOLS);
+
+  const techRoot = document.getElementById('techRoot');
+  if (techRoot) techRoot.innerHTML = buildToolGroups(TECHNICAL_TOOLS);
+
+  /* -------------------------------------------------------
+     2. Mobile navigation
+     ------------------------------------------------------- */
+
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+
+  function setNav(open) {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', function () {
+      setNav(!nav.classList.contains('open'));
+    });
+
+    // Close after choosing a destination
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { setNav(false); });
+    });
+
+    // Escape closes the menu and returns focus to the button
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        setNav(false);
+        navToggle.focus();
+      }
+    });
+
+    // Reset when resizing back up to desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && nav.classList.contains('open')) setNav(false);
+    });
+  }
+
+  /* -------------------------------------------------------
+     3. Additional technical skills disclosure
+     ------------------------------------------------------- */
+
+  const techToggle = document.getElementById('techToggle');
+  const techPanel = document.getElementById('techPanel');
+
+  if (techToggle && techPanel) {
+    techToggle.addEventListener('click', function () {
+      const open = techToggle.getAttribute('aria-expanded') === 'true';
+      techToggle.setAttribute('aria-expanded', String(!open));
+      techPanel.hidden = open;
+    });
+  }
+
+  /* -------------------------------------------------------
+     4. Scroll-spy — only for sections the nav points to
+     ------------------------------------------------------- */
+
+  const navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+
+  const watched = navLinks
+    .map(function (link) {
+      const id = (link.getAttribute('href') || '').replace('#', '');
+      return id ? document.getElementById(id) : null;
+    })
+    .filter(Boolean);
+
+  if (watched.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    watched.forEach(function (section) { spy.observe(section); });
+  }
+
+  /* -------------------------------------------------------
+     5. Brand logo fallback
+     If a CDN icon fails, swap in a text badge instead of
+     showing a broken image.
+     ------------------------------------------------------- */
+
+  document.querySelectorAll('img.store-logo').forEach(function (img) {
+    img.addEventListener('error', function () {
+      const text = img.getAttribute('data-fallback');
+      if (text) {
+        const badge = document.createElement('span');
+        badge.className = 'tool-fallback';
+        badge.textContent = text;
+        img.replaceWith(badge);
+      } else {
+        img.style.display = 'none';
+      }
+    });
+  });
+
+
+  /* -------------------------------------------------------
+     6. Work-sample lightbox
+     Progressive enhancement: the original href remains a valid fallback.
+     Smooth opening/closing animation stays on-page and respects reduced motion.
+     ------------------------------------------------------- */
+
+  const sampleLightbox = document.getElementById('sampleLightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxMeta = document.getElementById('lightboxMeta');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxZoom = document.getElementById('lightboxZoom');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxPanel = sampleLightbox ? sampleLightbox.querySelector('.lightbox-panel') : null;
+  const reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  let lastLightboxTrigger = null;
+  let lightboxCloseTimer = null;
+  let lightboxIsClosing = false;
+  let currentSlideIndex = -1;
+
+  // Build the Previous/Next sequence from whatever lightbox triggers actually
+  // exist in the page right now — never hardcoded — deduplicated by href so
+  // the thumbnail and its "View sample" link (same image, two triggers) only
+  // count once and in DOM order (operational samples first, then visuals).
+  const galleryTriggers = Array.prototype.slice.call(document.querySelectorAll('.lightbox-trigger'));
+  const gallerySlides = [];
+  const seenHrefs = {};
+  galleryTriggers.forEach(function (trigger) {
+    const href = trigger.getAttribute('href');
+    if (!href || seenHrefs[href]) return;
+    seenHrefs[href] = true;
+    gallerySlides.push({ trigger: trigger, details: null });
+  });
+
+  function prefersReducedMotion() {
+    return reducedMotionQuery ? reducedMotionQuery.matches : false;
+  }
+
+  function getSampleDetails(trigger) {
+    const card = trigger.closest('.sample-card, .visual-project');
+    const titleNode = card ? card.querySelector('h3') : null;
+    const sourceNode = card ? card.querySelector('.sample-source') : null;
+    const categoryNode = card ? card.querySelector('.sample-category') : null;
+    const previewImage = trigger.querySelector('img') || (card ? card.querySelector('img') : null);
+
+    const metaParts = [];
+    if (sourceNode && sourceNode.textContent.trim()) metaParts.push(sourceNode.textContent.trim());
+    if (categoryNode && categoryNode.textContent.trim()) metaParts.push(categoryNode.textContent.trim());
+
+    return {
+      src: trigger.getAttribute('href'),
+      title: titleNode && titleNode.textContent.trim() ? titleNode.textContent.trim() : 'Work sample',
+      meta: metaParts.join(' · '),
+      alt: previewImage && previewImage.getAttribute('alt')
+        ? previewImage.getAttribute('alt')
+        : (titleNode ? titleNode.textContent.trim() : 'Work sample preview')
+    };
+  }
+
+  function findSlideIndexForTrigger(trigger) {
+    const href = trigger.getAttribute('href');
+    for (let i = 0; i < gallerySlides.length; i++) {
+      if (gallerySlides[i].trigger.getAttribute('href') === href) return i;
+    }
+    return -1;
+  }
+
+  function updateNavState() {
+    if (lightboxPrev) lightboxPrev.disabled = currentSlideIndex <= 0;
+    if (lightboxNext) lightboxNext.disabled = currentSlideIndex >= gallerySlides.length - 1;
+  }
+
+  function resetZoom() {
+    if (lightboxImage) lightboxImage.classList.remove('is-zoomed');
+    if (lightboxZoom) {
+      lightboxZoom.setAttribute('aria-pressed', 'false');
+      lightboxZoom.setAttribute('aria-label', 'Zoom in on image');
+      const glyph = lightboxZoom.querySelector('.lightbox-zoom-glyph');
+      if (glyph) glyph.textContent = '+';
+    }
+  }
+
+  function toggleZoom() {
+    if (!lightboxImage) return;
+    const zoomed = lightboxImage.classList.toggle('is-zoomed');
+    if (lightboxZoom) {
+      lightboxZoom.setAttribute('aria-pressed', String(zoomed));
+      lightboxZoom.setAttribute('aria-label', zoomed ? 'Zoom out of image' : 'Zoom in on image');
+      const glyph = lightboxZoom.querySelector('.lightbox-zoom-glyph');
+      if (glyph) glyph.textContent = zoomed ? '\u2212' : '+';
+    }
+  }
+
+  function showSlide(index) {
+    const slide = gallerySlides[index];
+    if (!slide || !lightboxImage) return;
+
+    if (!slide.details) slide.details = getSampleDetails(slide.trigger);
+    const details = slide.details;
+
+    currentSlideIndex = index;
+    lastLightboxTrigger = slide.trigger;
+    resetZoom();
+    updateNavState();
+
+    lightboxImage.classList.remove('is-loaded');
+    lightboxImage.src = details.src;
+    lightboxImage.alt = details.alt;
+    lightboxTitle.textContent = details.title;
+    lightboxMeta.textContent = details.meta;
+
+    if (lightboxImage.complete && lightboxImage.naturalWidth) {
+      window.requestAnimationFrame(function () {
+        lightboxImage.classList.add('is-loaded');
+      });
+    }
+  }
+
+  function showPrevSlide() {
+    if (currentSlideIndex <= 0) return;
+    showSlide(currentSlideIndex - 1);
+  }
+
+  function showNextSlide() {
+    if (currentSlideIndex >= gallerySlides.length - 1) return;
+    showSlide(currentSlideIndex + 1);
+  }
+
+  function revealLightbox() {
+    if (!sampleLightbox || !sampleLightbox.open) return;
+    sampleLightbox.classList.remove('is-closing');
+    sampleLightbox.classList.add('is-visible');
+  }
+
+  function openSampleLightbox(trigger) {
+    if (!sampleLightbox || !lightboxImage || typeof sampleLightbox.showModal !== 'function') return false;
+
+    const index = findSlideIndexForTrigger(trigger);
+    if (index === -1) return false;
+
+    if (lightboxCloseTimer) {
+      window.clearTimeout(lightboxCloseTimer);
+      lightboxCloseTimer = null;
+    }
+
+    lightboxIsClosing = false;
+    sampleLightbox.classList.remove('is-visible', 'is-closing');
+
+    showSlide(index);
+
+    document.body.classList.add('lightbox-open');
+    sampleLightbox.showModal();
+
+    // Two frames guarantee the browser paints the initial scaled/faded state
+    // before transitioning to the visible state.
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(revealLightbox);
+    });
+
+    if (lightboxClose) lightboxClose.focus();
+    return true;
+  }
+
+  function finishLightboxClose() {
+    if (!sampleLightbox || !sampleLightbox.open) return;
+    sampleLightbox.close();
+  }
+
+  function closeSampleLightbox() {
+    if (!sampleLightbox || !sampleLightbox.open || lightboxIsClosing) return;
+
+    if (prefersReducedMotion()) {
+      finishLightboxClose();
+      return;
+    }
+
+    lightboxIsClosing = true;
+    sampleLightbox.classList.remove('is-visible');
+    sampleLightbox.classList.add('is-closing');
+
+    // Match the CSS closing transition, then remove the native dialog.
+    lightboxCloseTimer = window.setTimeout(finishLightboxClose, 240);
+  }
+
+  document.querySelectorAll('.lightbox-trigger').forEach(function (trigger) {
+    trigger.addEventListener('click', function (e) {
+      // Preserve normal browser behaviors such as Ctrl/Cmd-click or middle-click.
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+      if (openSampleLightbox(trigger)) e.preventDefault();
+    });
+  });
+
+  if (sampleLightbox) {
+    if (lightboxImage) {
+      lightboxImage.addEventListener('load', function () {
+        lightboxImage.classList.add('is-loaded');
+      });
+      // Clicking the image itself toggles the fit/zoomed view, same as the Zoom button.
+      lightboxImage.addEventListener('click', toggleZoom);
+    }
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeSampleLightbox);
+    }
+
+    if (lightboxZoom) {
+      lightboxZoom.addEventListener('click', toggleZoom);
+    }
+
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener('click', showPrevSlide);
+    }
+
+    if (lightboxNext) {
+      lightboxNext.addEventListener('click', showNextSlide);
+    }
+
+    // Left/Right arrow keys move through the gallery while the dialog is open.
+    // Escape is handled separately below via the dialog's native 'cancel' event.
+    sampleLightbox.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showPrevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        showNextSlide();
+      }
+    });
+
+    // Intercept native Escape closing so the exit animation can play first.
+    sampleLightbox.addEventListener('cancel', function (e) {
+      e.preventDefault();
+      closeSampleLightbox();
+    });
+
+    // Clicking the dark/blurred space outside the panel closes the preview.
+    sampleLightbox.addEventListener('click', function (e) {
+      if (e.target === sampleLightbox || (lightboxPanel && !lightboxPanel.contains(e.target))) {
+        closeSampleLightbox();
+      }
+    });
+
+    sampleLightbox.addEventListener('close', function () {
+      if (lightboxCloseTimer) {
+        window.clearTimeout(lightboxCloseTimer);
+        lightboxCloseTimer = null;
+      }
+
+      lightboxIsClosing = false;
+      sampleLightbox.classList.remove('is-visible', 'is-closing');
+      document.body.classList.remove('lightbox-open');
+      lightboxImage.classList.remove('is-loaded');
+      lightboxImage.removeAttribute('src');
+      lightboxImage.alt = '';
+      lightboxMeta.textContent = '';
+      resetZoom();
+      currentSlideIndex = -1;
+
+      if (lastLightboxTrigger && document.contains(lastLightboxTrigger)) {
+        lastLightboxTrigger.focus();
+      }
+      lastLightboxTrigger = null;
+    });
+  }
+
+})();
