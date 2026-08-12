@@ -29,7 +29,7 @@
 <meta name="twitter:image" content="https://jortegaadminva.github.io/johnny-portfolio/assets/profile.png">
 <meta name="twitter:image:alt" content="Johnny M. Ortega Jr., E-Commerce & Operations Specialist | IT Support">
 
-<meta name="theme-color" content="#FBF7EE">
+<meta name="theme-color" content="#F8F5EE">
 
 <link rel="icon" type="image/png" href="assets/logo1.png">
 <link rel="apple-touch-icon" href="assets/logo1.png">
@@ -42,7 +42,7 @@
 <!-- Cache-busting: bump ?v=X.X on styles.css and script.js together (e.g. 1.1 -> 1.2)
      whenever a CSS/JS change is deployed, so GitHub Pages / browsers fetch the new files
      instead of a cached copy. Keep both files on the same version number. -->
-<link rel="stylesheet" href="styles.css?v=1.2">
+<link rel="stylesheet" href="styles.css?v=3.3">
 
 <!-- Structured data: only facts present in the resumes / site -->
 <script type="application/ld+json">
@@ -94,7 +94,19 @@
 
     <nav id="nav" class="nav" aria-label="Main navigation">
       <a href="#home" class="nav-link">Home</a>
-      <a href="#casestudies" class="nav-link">Work</a>
+
+      <div class="nav-item-dropdown">
+        <button type="button" class="nav-link nav-dropdown-toggle" id="workDropdownToggle"
+                aria-haspopup="true" aria-expanded="false" aria-controls="workDropdownMenu">
+          Work <span class="nav-dropdown-caret" aria-hidden="true">&#9662;</span>
+        </button>
+        <ul class="nav-dropdown-menu" id="workDropdownMenu" aria-label="Work section links">
+          <li><a href="#case-studies" class="nav-dropdown-link">Case Studies</a></li>
+          <li><a href="#storefronts" class="nav-dropdown-link">Storefronts</a></li>
+          <li><a href="#work-samples" class="nav-dropdown-link">Work Samples</a></li>
+        </ul>
+      </div>
+
       <a href="#services" class="nav-link">Services</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -115,33 +127,34 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow">Available for remote work &middot; International clients</p>
+          <p class="eyebrow" data-reveal data-reveal-hero style="--reveal-delay:0ms">Available for remote work &middot; International clients</p>
 
-          <h1>E-Commerce &amp; Operations Support for Growing Businesses</h1>
+          <h1 data-reveal data-reveal-hero style="--reveal-delay:80ms">E-Commerce &amp; Operations Support for Growing Businesses</h1>
 
-          <p class="hero-lede">
+          <p class="hero-lede" data-reveal data-reveal-hero style="--reveal-delay:160ms">
             I help business owners run the marketplace and back-office side of their business —
             product listings, catalogs, inventory, orders and suppliers — along with the
             administrative work and technical troubleshooting that keep everything else on track.
           </p>
 
-          <div class="btn-row">
-            <a href="#contact" class="btn btn-primary">Discuss a Role or Project</a>
-            <a href="#samples" class="btn btn-outline">View Work Samples</a>
+          <div class="btn-row" data-reveal data-reveal-hero style="--reveal-delay:220ms">
+            <a href="#contact" class="btn btn-primary">Let's Talk About Your Business</a>
+            <a href="#work-samples" class="btn btn-outline">View Work Samples</a>
           </div>
         </div>
 
-        <div class="hero-photo">
+        <div class="hero-photo" data-reveal data-reveal-hero style="--reveal-delay:120ms">
           <div class="hero-photo-back" aria-hidden="true"></div>
-          <div class="hero-photo-front">
+          <div class="hero-photo-front" data-float>
             <img src="assets/profile.png" alt="Johnny M. Ortega Jr." width="420" height="500">
           </div>
         </div>
       </div>
 
-      <!-- Two specialization paths -->
+      <!-- Two specialization paths — e-commerce is the primary specialization -->
       <div class="paths">
-        <article class="path-card">
+        <article class="path-card path-card-primary">
+          <p class="path-badge">Primary specialization</p>
           <h2 class="path-title">E-Commerce Operations</h2>
           <ul class="path-list">
             <li>Product listings</li>
@@ -151,10 +164,10 @@
             <li>Customer support</li>
             <li>Supplier coordination</li>
           </ul>
-          <a href="#portfolio" class="path-link">See e-commerce work &rarr;</a>
+          <a href="#storefronts" class="path-link">See e-commerce work &rarr;</a>
         </article>
 
-        <article class="path-card">
+        <article class="path-card path-card-secondary">
           <h2 class="path-title">Admin &amp; Business Operations</h2>
           <ul class="path-list">
             <li>Email management</li>
@@ -174,19 +187,19 @@
   <section class="section proof-strip" aria-label="Experience summary">
     <div class="wrap">
       <ul class="proof-grid">
-        <li class="proof-item">
+        <li class="proof-item proof-item-primary" data-reveal style="--reveal-delay:0ms">
           <strong>E-Commerce since 2018</strong>
           <span>Multi-channel marketplace, catalog, inventory and fulfillment operations</span>
         </li>
-        <li class="proof-item">
-          <strong>International experience</strong>
-          <span>Supported clients and teams across the United States, Canada, Israel and Singapore</span>
+        <li class="proof-item" data-reveal style="--reveal-delay:70ms">
+          <strong>International Client Experience</strong>
+          <span>Supported clients and teams remotely across multiple countries</span>
         </li>
-        <li class="proof-item">
+        <li class="proof-item" data-reveal style="--reveal-delay:140ms">
           <strong>7 storefronts across 2 engagements</strong>
           <span>Multi-store experience across eBay, WooCommerce and Etsy</span>
         </li>
-        <li class="proof-item">
+        <li class="proof-item" data-reveal style="--reveal-delay:210ms">
           <strong>Business owner</strong>
           <span>Hands-on procurement, inventory, production and project operations</span>
         </li>
@@ -194,10 +207,61 @@
     </div>
   </section>
 
-  <!-- ==================== CASE STUDIES ==================== -->
-  <section id="casestudies" class="section block-light">
+  <!-- ==================== WHAT I CAN TAKE OFF YOUR PLATE ==================== -->
+  <section id="plate" class="section block-tint">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
+        <p class="section-tag">Where I fit in</p>
+        <h2>What I Can Take Off Your Plate</h2>
+        <p class="section-sub">
+          Practical support for the recurring operational work behind your store.
+        </p>
+      </div>
+
+      <div class="plate-grid">
+        <article class="plate-card" data-reveal style="--reveal-delay:0ms">
+          <span class="plate-icon" aria-hidden="true">🏷️</span>
+          <h3>Product Listings</h3>
+          <p>Keep product information accurate, organized and marketplace-ready.</p>
+        </article>
+
+        <article class="plate-card" data-reveal style="--reveal-delay:60ms">
+          <span class="plate-icon" aria-hidden="true">📋</span>
+          <h3>Catalog &amp; Inventory</h3>
+          <p>Keep SKUs, pricing, product data and inventory records organized.</p>
+        </article>
+
+        <article class="plate-card" data-reveal style="--reveal-delay:120ms">
+          <span class="plate-icon" aria-hidden="true">📦</span>
+          <h3>Orders &amp; Fulfillment</h3>
+          <p>Support order processing, fulfillment and shipping workflows.</p>
+        </article>
+
+        <article class="plate-card" data-reveal style="--reveal-delay:180ms">
+          <span class="plate-icon" aria-hidden="true">🤝</span>
+          <h3>Supplier Coordination</h3>
+          <p>Coordinate supplier information, sourcing and availability.</p>
+        </article>
+
+        <article class="plate-card" data-reveal style="--reveal-delay:240ms">
+          <span class="plate-icon" aria-hidden="true">🔍</span>
+          <h3>Research &amp; Reporting</h3>
+          <p>Support product research, competitor research and operational reporting.</p>
+        </article>
+
+        <article class="plate-card" data-reveal style="--reveal-delay:300ms">
+          <span class="plate-icon" aria-hidden="true">🗂️</span>
+          <h3>Business Administration</h3>
+          <p>Handle documentation, coordination and recurring administrative workflows.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CASE STUDIES ==================== -->
+  <section id="case-studies" class="section block-light">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
         <p class="section-tag">Featured work</p>
         <h2>Three engagements in detail</h2>
         <p class="section-sub">
@@ -207,11 +271,16 @@
 
       <div class="case-list">
 
-        <article class="case-card">
+        <article class="case-card" data-reveal style="--reveal-delay:0ms">
           <div class="case-meta">
             <span class="case-kind">E-Commerce Operations</span>
             <h3>Marketplace &amp; catalog operations for a US automotive parts manufacturer</h3>
             <p class="case-org">California-based ECM and TIPM rebuilder, supported via Maks DataTech &middot; Jan 2021 – Mar 2025</p>
+            <ul class="case-quickmeta">
+              <li><span>Role</span>E-Commerce Operations</li>
+              <li><span>Tools / Platforms</span>WooCommerce &middot; eBay</li>
+              <li><span>Focus</span>Catalog accuracy &amp; vehicle fitment</li>
+            </ul>
           </div>
           <div class="case-body">
             <div class="case-block">
@@ -234,24 +303,38 @@
               </ul>
             </div>
             <div class="case-block">
-              <h4>Tools</h4>
-              <p class="case-tools">WooCommerce &middot; WordPress &middot; Elementor &middot; eBay Seller Hub &middot; ShipStation &middot; Adobe Photoshop &middot; Excel</p>
+              <h4>Tools &amp; Platforms</h4>
+              <ul class="case-tools-chips">
+                <li class="tool-chip">WooCommerce</li>
+                <li class="tool-chip">WordPress</li>
+                <li class="tool-chip">Elementor</li>
+                <li class="tool-chip">eBay Seller Hub</li>
+                <li class="tool-chip">ShipStation</li>
+                <li class="tool-chip">Adobe Photoshop</li>
+                <li class="tool-chip">Microsoft Excel</li>
+              </ul>
             </div>
             <div class="case-block">
               <h4>Why it mattered</h4>
               <p>
-                High-volume catalog updates were processed while maintaining product-data accuracy,
-                reducing listing backlogs during peak periods.
+                Supported ongoing catalog, listing, fulfillment and reporting work across a large
+                automotive product range, with attention to the listing and fitment accuracy that
+                affects whether a buyer orders the right part.
               </p>
             </div>
           </div>
         </article>
 
-        <article class="case-card">
+        <article class="case-card" data-reveal style="--reveal-delay:90ms">
           <div class="case-meta">
             <span class="case-kind">E-Commerce Operations</span>
             <h3>Etsy storefront operations, from sourcing to fulfillment</h3>
             <p class="case-org">Etsy seller business, client based in Israel &middot; Remote freelance &middot; May 2026 – Jul 2026</p>
+            <ul class="case-quickmeta">
+              <li><span>Role</span>E-Commerce Operations</li>
+              <li><span>Tools / Platforms</span>Etsy</li>
+              <li><span>Focus</span>Daily storefront ops &amp; fulfillment</li>
+            </ul>
           </div>
           <div class="case-body">
             <div class="case-block">
@@ -275,8 +358,8 @@
               </ul>
             </div>
             <div class="case-block">
-              <h4>Tools</h4>
-              <p class="case-tools">Etsy Seller &middot; Alura &middot; EtsyHunt &middot; 1688 &middot; AliExpress &middot; Canva &middot; ChatGPT &middot; Google AI Studio</p>
+              <h4>Tools &amp; Platforms</h4>
+              <ul class="case-tools-chips"><li class="tool-chip">Etsy Seller</li><li class="tool-chip">Alura</li><li class="tool-chip">EtsyHunt</li><li class="tool-chip">1688</li><li class="tool-chip">AliExpress</li><li class="tool-chip">Canva</li><li class="tool-chip">ChatGPT</li><li class="tool-chip">Google AI Studio</li></ul>
             </div>
             <div class="case-block">
               <h4>Why it mattered</h4>
@@ -289,11 +372,16 @@
           </div>
         </article>
 
-        <article class="case-card">
+        <article class="case-card" data-reveal style="--reveal-delay:180ms">
           <div class="case-meta">
             <span class="case-kind">Business Operations &amp; Ownership</span>
             <h3>1,000-piece custom apparel order, end to end</h3>
-            <p class="case-org">JF PrinTek Digital Printing Services (founded and operated by Johnny) &middot; Philippines &middot; Jul 2025 – Apr 2026</p>
+            <p class="case-org">JF PrinTek Digital Printing Services (founded and operated by me) &middot; Philippines &middot; Jul 2025 – Apr 2026</p>
+            <ul class="case-quickmeta">
+              <li><span>Role</span>Business Operations &amp; Ownership</li>
+              <li><span>Tools / Systems</span>In-house operations</li>
+              <li><span>Focus</span>Sourcing, production &amp; delivery</li>
+            </ul>
           </div>
           <div class="case-body">
             <div class="case-block">
@@ -314,8 +402,13 @@
               </ul>
             </div>
             <div class="case-block">
-              <h4>Tools</h4>
-              <p class="case-tools">Google Sheets &middot; Microsoft Excel &middot; supplier coordination by email and messaging</p>
+              <h4>Tools &amp; Systems</h4>
+              <ul class="case-tools-chips">
+                <li class="tool-chip">Google Sheets</li>
+                <li class="tool-chip">Microsoft Excel</li>
+                <li class="tool-chip">Canva</li>
+                <li class="tool-chip">Adobe Photoshop</li>
+              </ul>
             </div>
             <div class="case-block">
               <h4>Why it mattered</h4>
@@ -331,94 +424,32 @@
       </div>
     </div>
   </section>
-
-  <!-- ==================== SERVICES ==================== -->
-  <section id="services" class="section block-dark">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-tag on-dark">How I can help</p>
-        <h2 class="on-dark">Four ways I take work off your plate</h2>
-        <p class="section-sub on-dark">
-          Ongoing support for the operational side of your business, so you can spend your time
-          on the parts only you can do.
-        </p>
-      </div>
-
-      <div class="service-grid">
-        <article class="service-card">
-          <span class="service-icon" aria-hidden="true">🛒</span>
-          <h3>E-Commerce &amp; Marketplace Operations</h3>
-          <p>
-            Product research, listing creation and marketplace SEO across eBay, Etsy, Amazon,
-            Walmart, WooCommerce, Shopee and Lazada. Catalog and SKU management, product data and
-            specifications, vehicle-fitment records, pricing, and customer inquiries and order
-            concerns — helping keep product, catalog and marketplace information accurate,
-            organized and up to date.
-          </p>
-        </article>
-
-        <article class="service-card">
-          <span class="service-icon" aria-hidden="true">📦</span>
-          <h3>Catalog, Inventory &amp; Fulfillment</h3>
-          <p>
-            Inventory monitoring and reconciliation, order processing and fulfillment tracking in
-            tools like ShipStation, pricing updates, and sales and fulfillment reporting. Supplier
-            coordination, including sourcing through 1688 and AliExpress for dropshipping workflows.
-          </p>
-        </article>
-
-        <article class="service-card">
-          <span class="service-icon" aria-hidden="true">🗂️</span>
-          <h3>Business &amp; Administrative Operations</h3>
-          <p>
-            Email and calendar management, scheduling, meeting coordination, business correspondence,
-            reports and SOP documentation. HR and recruitment administration — job postings, candidate
-            communication, interview scheduling and onboarding paperwork — plus vendor coordination,
-            procurement and expense tracking.
-          </p>
-        </article>
-
-        <article class="service-card">
-          <span class="service-icon" aria-hidden="true">🖥️</span>
-          <h3>IT &amp; Technical Support</h3>
-          <p>
-            Hardware, software and network troubleshooting, Windows and Linux server administration,
-            pfSense and OPNsense firewall setup, and RingCentral/VoIP systems support. A useful
-            differentiator — I troubleshoot my own tools and provide practical troubleshooting
-            support when technical issues affect day-to-day operations.
-          </p>
-        </article>
-      </div>
-
-      <p class="service-footnote">
-        Supporting skills: AI-assisted product visuals and Canva editing for marketplace content,
-        plus Adobe Photoshop product-image editing for e-commerce listings.
-      </p>
-    </div>
-  </section>
-
   <!-- ==================== CLIENT PROJECTS ==================== -->
-  <section id="portfolio" class="section block-tint">
+  <section id="storefronts" class="section block-tint">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <p class="section-tag">Real e-commerce work</p>
-        <h2>Selected e-commerce storefronts</h2>
+        <h2>Real Storefronts I've Supported</h2>
         <p class="section-sub">
-          Storefronts I've worked on directly, grouped by client engagement. Each link opens the live store.
+          Real storefronts I've supported directly across client engagements.
         </p>
         <p class="section-note">
-          Live storefront content may have changed since my engagement; links are provided as context for the stores I supported.
+          Live stores may change over time; links are provided as context.
         </p>
       </div>
 
       <div class="store-group">
         <div class="store-group-head">
-          <h3>Automotive e-commerce engagement</h3>
-          <p>One manufacturer, four storefronts across eBay and WooCommerce &middot; Jan 2021 – Mar 2025</p>
+          <h3>Automotive e-commerce</h3>
+          <p><strong>4 storefronts</strong> &middot; eBay + WooCommerce &middot; Jan 2021 – Mar 2025</p>
         </div>
-      <div class="store-grid">
+      <div class="store-scroll-wrap">
+        <button type="button" class="store-scroll-btn store-scroll-prev" aria-label="Scroll to previous automotive storefronts" disabled>
+          <span aria-hidden="true">&#8249;</span>
+        </button>
+        <div class="store-grid store-scroll" tabindex="0" role="group" aria-label="Automotive storefronts — scroll horizontally for more">
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:0ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/ebay/E53238" alt=""
                  data-fallback="eB" width="28" height="28" loading="lazy">
@@ -428,18 +459,17 @@
           <p class="store-niche">Automotive parts</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Product listings and listing updates</li>
-            <li>Inventory and pricing maintenance</li>
-            <li>Product data and specifications</li>
-            <li>Product image editing</li>
+            <li>Product listings &amp; updates</li>
+            <li>Inventory &amp; pricing</li>
+            <li>Product data &amp; images</li>
           </ul>
           <p class="store-tools">eBay Seller Hub &middot; Photoshop &middot; Excel</p>
           <a href="https://www.ebay.com/str/jaffescarparts" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:70ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/ebay/E53238" alt=""
                  data-fallback="eB" width="28" height="28" loading="lazy">
@@ -449,18 +479,17 @@
           <p class="store-niche">Automotive parts</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Product listings and listing updates</li>
-            <li>Inventory and pricing maintenance</li>
-            <li>SKU and catalog records</li>
-            <li>Product image editing</li>
+            <li>Product listings &amp; updates</li>
+            <li>Inventory &amp; pricing</li>
+            <li>SKU &amp; catalog records</li>
           </ul>
           <p class="store-tools">eBay Seller Hub &middot; Photoshop &middot; Excel</p>
           <a href="https://www.ebay.com/str/maksautoparts" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:140ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/wordpress/21759B" alt=""
                  data-fallback="Wp" width="28" height="28" loading="lazy">
@@ -470,18 +499,17 @@
           <p class="store-niche">Automotive parts</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Product pages built and updated in Elementor</li>
-            <li>Vehicle compatibility (fitment) data</li>
-            <li>Inventory and pricing updates</li>
-            <li>Listing content and SEO keywords</li>
+            <li>Product pages &amp; Elementor updates</li>
+            <li>Vehicle fitment data</li>
+            <li>Inventory, SEO &amp; listing content</li>
           </ul>
           <p class="store-tools">WordPress &middot; WooCommerce &middot; Elementor</p>
           <a href="https://tipmrebuilders.com/" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:210ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/wordpress/21759B" alt=""
                  data-fallback="Wp" width="28" height="28" loading="lazy">
@@ -491,28 +519,35 @@
           <p class="store-niche">Automotive parts</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Product pages built and updated in Elementor</li>
-            <li>SKU records and product specifications</li>
-            <li>Inventory and pricing updates</li>
-            <li>Product image editing</li>
+            <li>Product pages &amp; Elementor updates</li>
+            <li>SKU &amp; product specifications</li>
+            <li>Inventory, pricing &amp; images</li>
           </ul>
           <p class="store-tools">WordPress &middot; WooCommerce &middot; Photoshop</p>
           <a href="https://ecmrebuilders.com/" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
+        </div>
+        <button type="button" class="store-scroll-btn store-scroll-next" aria-label="Scroll to next automotive storefronts">
+          <span aria-hidden="true">&#8250;</span>
+        </button>
       </div>
       </div>
 
       <div class="store-group">
         <div class="store-group-head">
-          <h3>Etsy e-commerce engagement</h3>
-          <p>Storefront group for an Etsy seller based in Israel &middot; May 2026 – Jul 2026</p>
+          <h3>Etsy e-commerce</h3>
+          <p><strong>3 storefronts</strong> &middot; Etsy seller engagement &middot; May 2026 – Jul 2026</p>
         </div>
-      <div class="store-grid">
+      <div class="store-scroll-wrap">
+        <button type="button" class="store-scroll-btn store-scroll-prev" aria-label="Scroll to previous Etsy storefronts" disabled>
+          <span aria-hidden="true">&#8249;</span>
+        </button>
+        <div class="store-grid store-scroll" tabindex="0" role="group" aria-label="Etsy storefronts — scroll horizontally for more">
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:0ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/etsy/F1641E" alt=""
                  data-fallback="Et" width="28" height="28" loading="lazy">
@@ -522,18 +557,17 @@
           <p class="store-niche">Handmade travertine pendant lamps</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Listing SEO and keyword research</li>
-            <li>Listing creation and catalog updates</li>
-            <li>Inventory reconciliation and order fulfillment</li>
-            <li>Customer messages and order concerns</li>
+            <li>Listing SEO &amp; keyword research</li>
+            <li>Catalog &amp; listing updates</li>
+            <li>Inventory, fulfillment &amp; customer support</li>
           </ul>
           <p class="store-tools">Etsy Seller &middot; Canva &middot; Google Sheets</p>
           <a href="https://www.etsy.com/shop/LightOrArt" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:70ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/etsy/F1641E" alt=""
                  data-fallback="Et" width="28" height="28" loading="lazy">
@@ -543,18 +577,17 @@
           <p class="store-niche">Handmade wooden chandeliers</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Listing SEO and competitor research</li>
-            <li>Listing images, mockups and banners</li>
-            <li>Supplier coordination and fulfillment support</li>
-            <li>Customer messages and order concerns</li>
+            <li>Listing SEO &amp; competitor research</li>
+            <li>Images, mockups &amp; banners</li>
+            <li>Supplier coordination &amp; fulfillment</li>
           </ul>
           <p class="store-tools">Etsy Seller &middot; Canva &middot; 1688 / AliExpress</p>
           <a href="https://www.etsy.com/shop/Raphelux" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
-        <article class="store-card">
+        <article class="store-card" data-reveal style="--reveal-delay:140ms">
           <header class="store-top">
             <img class="store-logo" src="https://cdn.simpleicons.org/etsy/F1641E" alt=""
                  data-fallback="Et" width="28" height="28" loading="lazy">
@@ -564,28 +597,30 @@
           <p class="store-niche">Medieval dresses &amp; historical clothing</p>
           <h4 class="store-label">What I handled</h4>
           <ul class="store-list">
-            <li>Listing SEO and keyword optimization</li>
-            <li>Product trackers for pricing and inventory</li>
-            <li>Order fulfillment support</li>
-            <li>Customer inquiries and returns</li>
+            <li>Listing SEO &amp; keyword optimization</li>
+            <li>Pricing &amp; inventory tracking</li>
+            <li>Fulfillment, inquiries &amp; returns</li>
           </ul>
           <p class="store-tools">Etsy Seller &middot; Google Sheets &middot; Canva</p>
           <a href="https://www.etsy.com/shop/MedievalGownCo" target="_blank" rel="noopener" class="store-link">
-            View live store <span aria-hidden="true">&rarr;</span>
+            View storefront <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
 
+        </div>
+        <button type="button" class="store-scroll-btn store-scroll-next" aria-label="Scroll to next Etsy storefronts">
+          <span aria-hidden="true">&#8250;</span>
+        </button>
       </div>
       </div>
     </div>
   </section>
-
   <!-- ==================== WORK SAMPLES ==================== -->
-  <section id="samples" class="section block-light">
+  <section id="work-samples" class="section block-light">
     <div class="wrap">
-      <div class="section-head">
-        <p class="section-tag">Actual work</p>
-        <h2>Selected work samples</h2>
+      <div class="section-head" data-reveal>
+        <p class="section-tag">Core proof</p>
+        <h2>Selected Work Samples</h2>
         <p class="section-sub">
           Real examples of e-commerce, operational, and product-content work I've handled. Client,
           customer, employee, and commercially sensitive information has been removed, anonymized, or
@@ -605,7 +640,7 @@
 
         <div class="sample-grid">
 
-          <article class="sample-card">
+          <article class="sample-card" data-reveal style="--reveal-delay:0ms">
             <a href="assets/samples/etsy/order-fulfillment-tracker.webp"
                class="sample-media lightbox-trigger"
                aria-label="View sanitized Etsy order fulfillment and operations tracker">
@@ -632,7 +667,7 @@
             <p class="sample-privacy">🔒 Confidential data replaced</p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card" data-reveal style="--reveal-delay:70ms">
             <a href="assets/samples/etsy/etsy-seo-sop.webp"
                class="sample-media lightbox-trigger"
                aria-label="View sanitized Etsy SEO and keyword research SOP">
@@ -658,7 +693,7 @@
             <p class="sample-privacy">🔒 Internal workflow partially shown</p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card" data-reveal style="--reveal-delay:140ms">
             <a href="assets/samples/maks/catalog-verification.webp"
                class="sample-media lightbox-trigger"
                aria-label="View sanitized automotive catalog verification and data quality audit">
@@ -685,7 +720,7 @@
             <p class="sample-privacy">🔒 Internal data anonymized</p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card" data-reveal style="--reveal-delay:210ms">
             <a href="assets/samples/maks/sales-shipment-report.webp"
                class="sample-media lightbox-trigger"
                aria-label="View sanitized sales and shipment comparison report">
@@ -712,7 +747,7 @@
             <p class="sample-privacy">🔒 Portfolio-safe data</p>
           </article>
 
-          <article class="sample-card">
+          <article class="sample-card" data-reveal style="--reveal-delay:280ms">
             <a href="assets/samples/maks/supply-demand-report.webp"
                class="sample-media lightbox-trigger"
                aria-label="View sanitized core supply and demand report">
@@ -754,7 +789,7 @@
 
         <div class="visual-project-grid">
 
-          <article class="visual-project">
+          <article class="visual-project" data-reveal style="--reveal-delay:0ms">
             <div class="visual-meta">
               <p class="sample-source">Etsy Store Management</p>
               <h3>Pendant Lamp AI-Generated Listing Visuals</h3>
@@ -788,7 +823,7 @@
             <p class="sample-privacy">AI-generated visuals &middot; Canva edited &middot; Actual Etsy work</p>
           </article>
 
-          <article class="visual-project">
+          <article class="visual-project" data-reveal style="--reveal-delay:70ms">
             <div class="visual-meta">
               <p class="sample-source">Etsy Store Management</p>
               <h3>Chandelier AI-Generated Product Visuals</h3>
@@ -822,7 +857,7 @@
             <p class="sample-privacy">AI-generated visuals &middot; Canva edited &middot; Actual Etsy work</p>
           </article>
 
-          <article class="visual-project">
+          <article class="visual-project" data-reveal style="--reveal-delay:140ms">
             <div class="visual-meta">
               <p class="sample-source">Etsy Store Management</p>
               <h3>Medieval Dress AI-Generated Listing Visuals</h3>
@@ -856,7 +891,7 @@
             <p class="sample-privacy">AI-generated visuals &middot; Canva edited &middot; Actual Etsy work</p>
           </article>
 
-          <article class="visual-project">
+          <article class="visual-project" data-reveal style="--reveal-delay:210ms">
             <div class="visual-meta">
               <p class="sample-source">Maks DataTech</p>
               <h3>Automotive Product Listing Graphic</h3>
@@ -887,11 +922,92 @@
 
     </div>
   </section>
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services" class="section block-dark">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="section-tag on-dark">How I can help</p>
+        <h2 class="on-dark">E-Commerce First, Backed by Full Operational Support</h2>
+        <p class="section-sub on-dark">
+          E-commerce and marketplace operations are where I spend most of my time — business
+          administration and IT support round out the picture.
+        </p>
+      </div>
+
+      <p class="service-tier-label on-dark" data-reveal>Primary — e-commerce operations</p>
+      <div class="service-grid service-grid-featured">
+        <article class="service-card service-card-featured" data-reveal style="--reveal-delay:0ms">
+          <span class="service-icon" aria-hidden="true">🛒</span>
+          <h3>E-Commerce &amp; Marketplace Operations</h3>
+          <p class="service-lead">Keep your marketplace catalog accurate and easier to manage.</p>
+          <ul class="service-bullets">
+            <li>Product research &amp; marketplace SEO</li>
+            <li>Listing creation &amp; optimization</li>
+            <li>Catalog &amp; SKU management</li>
+            <li>Pricing &amp; product-data accuracy</li>
+            <li>Customer inquiries &amp; order concerns</li>
+          </ul>
+          <ul class="service-platform-chips" aria-label="E-commerce platforms">
+              <li>eBay</li><li>Etsy</li><li>Amazon</li><li>Walmart</li><li>WooCommerce</li><li>Shopee</li><li>Lazada</li>
+            </ul>
+        </article>
+
+        <article class="service-card service-card-featured" data-reveal style="--reveal-delay:70ms">
+          <span class="service-icon" aria-hidden="true">📦</span>
+          <h3>Catalog, Inventory &amp; Fulfillment</h3>
+          <p class="service-lead">Keep inventory, pricing and fulfillment running without gaps.</p>
+          <ul class="service-bullets">
+            <li>Inventory monitoring &amp; reconciliation</li>
+            <li>Order processing &amp; fulfillment tracking</li>
+            <li>Pricing updates</li>
+            <li>Sales &amp; fulfillment reporting</li>
+            <li>Supplier coordination &amp; sourcing</li>
+          </ul>
+          <ul class="service-platform-chips" aria-label="Fulfillment and sourcing platforms">
+              <li>ShipStation</li><li>1688</li><li>AliExpress</li>
+            </ul>
+        </article>
+      </div>
+
+      <p class="service-tier-label on-dark" data-reveal>Secondary — business &amp; administrative operations</p>
+      <div class="service-grid service-grid-support">
+        <article class="service-card service-card-support" data-reveal style="--reveal-delay:0ms">
+          <span class="service-icon" aria-hidden="true">🗂️</span>
+          <h3>Business &amp; Administrative Operations</h3>
+          <p class="service-lead">Keep the administrative side of your business organized.</p>
+          <ul class="service-bullets">
+            <li>Email &amp; calendar management</li>
+            <li>Scheduling &amp; meeting coordination</li>
+            <li>Reports &amp; SOP documentation</li>
+            <li>HR &amp; recruitment administration</li>
+            <li>Vendor coordination &amp; procurement</li>
+          </ul>
+        </article>
+
+        <article class="service-card service-card-support service-card-it" data-reveal style="--reveal-delay:70ms">
+          <span class="service-icon" aria-hidden="true">🖥️</span>
+          <h3>IT &amp; Technical Support <span class="service-differentiator">Differentiator</span></h3>
+          <p class="service-lead">A useful technical backup when something breaks on your side.</p>
+          <ul class="service-bullets">
+            <li>Hardware, software &amp; network troubleshooting</li>
+            <li>Windows &amp; Linux server administration</li>
+            <li>pfSense &amp; OPNsense firewall setup</li>
+            <li>RingCentral / VoIP systems support</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="service-footnote">
+        Supporting skills: AI-assisted product visuals and Canva editing for marketplace content,
+        plus Adobe Photoshop product-image editing for e-commerce listings.
+      </p>
+    </div>
+  </section>
 
   <!-- ==================== TESTIMONIALS ==================== -->
   <section id="testimonials" class="section block-dark" aria-labelledby="testimonials-title">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <p class="section-tag on-dark">Trusted by clients</p>
         <h2 id="testimonials-title" class="on-dark">What clients say</h2>
       </div>
@@ -900,7 +1016,7 @@
         <div class="testimonial-track">
 
           <div class="testimonial-group">
-            <figure class="testimonial-card">
+            <figure class="testimonial-card testimonial-card-featured">
               <p class="testimonial-kind">E-Commerce &amp; Operations</p>
               <blockquote>
                 Johnny was a dependable member of our team who consistently handled administrative tasks
@@ -957,7 +1073,7 @@
           </div>
 
           <div class="testimonial-group" aria-hidden="true">
-            <figure class="testimonial-card">
+            <figure class="testimonial-card testimonial-card-featured">
               <p class="testimonial-kind">E-Commerce &amp; Operations</p>
               <blockquote>
                 Johnny was a dependable member of our team who consistently handled administrative tasks
@@ -1017,16 +1133,15 @@
       </div>
     </div>
   </section>
-
   <!-- ==================== TOOLS ==================== -->
   <section id="tools" class="section block-tint">
     <div class="wrap">
-      <div class="section-head">
-        <p class="section-tag">Tools</p>
-        <h2>Tools I Use for E-Commerce &amp; Operations</h2>
+      <div class="section-head tools-section-head" data-reveal>
+        <p class="section-tag">Tools &amp; platforms</p>
+        <h2>Tools I Use to Run E-Commerce Operations</h2>
         <p class="section-sub">
-          Platforms and tools I've used across marketplace operations, reporting, fulfillment,
-          supplier coordination, product content, business operations, and technical support.
+          A practical toolkit built around marketplace operations, reporting, fulfillment,
+          supplier coordination, product content, and day-to-day business support.
         </p>
       </div>
 
@@ -1048,47 +1163,54 @@
       </div>
     </div>
   </section>
-
   <!-- ==================== ABOUT ==================== -->
   <section id="about" class="section block-light">
     <div class="wrap">
       <div class="about-grid">
-        <div class="about-photo">
-          <img src="assets/johnny-ortega.jpg" alt="Johnny M. Ortega Jr. at his desk"
-               class="profile-photo" width="440" height="520" loading="lazy">
-        </div>
-
-        <div class="about-text">
+        <div class="about-text" data-reveal style="--reveal-delay:100ms">
           <p class="section-tag">About</p>
           <h2>E-commerce and operations support, backed by an IT background</h2>
 
+          <p class="about-label">Who I am</p>
           <p>
-            I'm Johnny, an E-Commerce &amp; Operations Specialist with an IT support background
-            based in the Philippines. My career has spanned business operations, e-commerce and
-            technical support since 2016, with e-commerce experience dating back to 2018 and remote
-            experience supporting international clients and teams.
-          </p>
-          <p>
-            Most of my work sits in the operational layer that keeps a business moving: product
-            listings, catalogs, inventory, orders and suppliers on the e-commerce side, along with
-            documentation, reporting, coordination and administrative workflows behind the business.
-            I work independently, keep records organized, and document processes so work is easier
-            to follow and hand over.
-          </p>
-          <p>
-            Having also founded and operated my own printing business and worked in IT support, I
-            understand both the operational side of running a business and the technical systems
-            that support it. That combination is especially useful when an e-commerce or operations
-            role also requires practical troubleshooting and technical problem-solving.
+            I'm Johnny — an E-Commerce &amp; Operations Specialist with an IT support background,
+            based in the Philippines. My career spans business operations, e-commerce and technical
+            support since 2016, with e-commerce experience since 2018 and remote experience
+            supporting international clients.
           </p>
 
-          <ul class="about-facts">
-            <li><strong>Based in</strong> The Philippines (PHT, UTC+8)</li>
-            <li><strong>Open to</strong> Remote opportunities with international clients and teams</li>
-            <li><strong>Studying</strong> BAS in Information Technology, Ensign College (in progress)</li>
-            <li><strong>Training</strong> CSS NC II (TESDA) &middot; Google IT Support: Technical Support Fundamentals &amp; Computer Networking (Coursera) &middot; Cisco Networking Academy</li>
-          </ul>
+          <p class="about-label">What I specialize in</p>
+          <p>
+            Most of my work sits in the operational layer that keeps a business moving — product
+            listings, catalogs, inventory, orders and suppliers, plus the documentation, reporting
+            and admin workflows behind them. I work independently, keep records organized, and
+            document processes so work is easy to hand over.
+          </p>
+
+          <p class="about-label">Why the IT background helps</p>
+          <p>
+            Having founded and operated my own printing business and worked in IT support, I
+            understand both the operational side of running a business and the technical systems
+            behind it — useful when a role also calls for practical troubleshooting.
+          </p>
         </div>
+
+        <aside class="about-aside">
+          <div class="about-photo" data-reveal style="--reveal-delay:0ms">
+            <img src="assets/johnny-ortega.jpg" alt="Johnny M. Ortega Jr. at his desk"
+                 class="profile-photo" data-float width="440" height="520" loading="lazy">
+          </div>
+
+          <div class="about-facts-wrap" data-reveal style="--reveal-delay:120ms">
+            <p class="about-label">Quick facts</p>
+            <ul class="about-facts">
+              <li><strong>Based in</strong> The Philippines (PHT, UTC+8)</li>
+              <li><strong>Open to</strong> Remote opportunities with international clients and teams</li>
+              <li><strong>Studying</strong> BAS in Information Technology, Ensign College (in progress)</li>
+              <li><strong>Training</strong> CSS NC II (TESDA) &middot; Google IT Support: Technical Support Fundamentals &amp; Computer Networking (Coursera) &middot; Cisco Networking Academy</li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -1097,10 +1219,10 @@
   <section id="resume" class="section resume-band">
     <div class="wrap">
       <div class="resume-inner">
-        <h2>Resume Available Upon Request</h2>
+        <h2>Want the Full Background?</h2>
         <p>
-          Interested in discussing a role or opportunity? I'd be happy to send you the resume
-          version most relevant to the position. You can contact me via email or WhatsApp.
+          I'd be happy to share the resume version most relevant to your role or project —
+          just reach out via email or WhatsApp and I'll send it straight over.
         </p>
         <div class="resume-buttons">
           <a href="mailto:jortega.adminva@gmail.com?subject=Resume%20Request%20-%20Johnny%20Ortega"
@@ -1123,16 +1245,16 @@
       <div class="contact-grid">
         <div class="contact-text">
           <p class="section-tag">Contact</p>
-          <h2>Let's make your operations easier</h2>
+          <h2>Let's Talk About Your Business</h2>
           <p class="contact-intro">
-            Tell me about the role, project, or operational challenge you're trying to solve.
-            I'll come back with how I can help and what it would take to get started.
+            Have recurring e-commerce or operations work that needs a reliable owner? Tell me
+            what you're managing and what you need help with, and I'll come back with how I can
+            help and what it would take to get started.
           </p>
           <p class="contact-note">
             I usually reply within one business day. WhatsApp is fastest.
           </p>
         </div>
-
         <div class="contact-cards">
           <a class="contact-card" href="https://wa.me/639972487219" target="_blank" rel="noopener">
             <span class="contact-icon" aria-hidden="true">💬</span>
@@ -1161,7 +1283,7 @@
           <a class="contact-card" href="https://www.onlinejobs.ph/jobseekers/info/690178" target="_blank" rel="noopener">
             <span class="contact-icon" aria-hidden="true">🌐</span>
             <span class="contact-copy">
-              <span class="contact-small">Hiring through a VA platform</span>
+              <span class="contact-small">Hiring through OnlineJobs.ph</span>
               <strong>OnlineJobs.ph profile</strong>
             </span>
           </a>
@@ -1169,6 +1291,7 @@
       </div>
     </div>
   </section>
+
 
 </main>
 
@@ -1219,6 +1342,6 @@
   </div>
 </dialog>
 
-<script src="script.js?v=1.2" defer></script>
+<script src="script.js?v=3.3" defer></script>
 </body>
 </html>

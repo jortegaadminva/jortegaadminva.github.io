@@ -26,21 +26,10 @@
         { name: '1688',                initials: '16', color: '#FF6A00' },
         { name: 'AliExpress',          initials: 'Ae', color: '#E62E04' },
         { name: 'Elementor',           initials: 'El', color: '#92003B' }
-      ],
-      secondary: [
-        {
-          label: 'Additional platform experience',
-          tools: [
-            { name: 'Amazon Seller Central', initials: 'Am', color: '#232F3E' },
-            { name: 'Walmart Marketplace', initials: 'Wm', color: '#0071CE' },
-            { name: 'Shopee',              initials: 'Sp', color: '#EE4D2D' },
-            { name: 'Lazada',              initials: 'Lz', color: '#0F146D' }
-          ]
-        }
       ]
     },
     {
-      group: 'Operations & productivity',
+      group: 'Operations & reporting',
       tools: [
         { name: 'Microsoft Excel',  initials: 'Ex', color: '#217346' },
         { name: 'Google Sheets',    initials: 'Gs', color: '#0F9D58' },
@@ -49,42 +38,32 @@
         { name: 'Monday.com',       initials: 'Mo', color: '#FF3D57' },
         { name: 'Trello',           initials: 'Tr', color: '#0079BF' },
         { name: 'Slack',            initials: 'Sl', color: '#4A154B' }
-      ],
-      secondary: [
-        {
-          label: 'Additional business tools',
-          tools: [
-            { name: 'HubSpot CRM',      initials: 'Hs', color: '#FF7A59' },
-            { name: 'Zoom',             initials: 'Zm', color: '#2D8CFF' },
-            { name: 'Mailchimp',        initials: 'Mc', color: '#FFE01B', dark: true }
-          ]
-        }
       ]
     },
     {
       group: 'AI & creative',
       tools: [
-        { name: 'Canva',              initials: 'Cv', color: '#00C4CC' },
-        { name: 'Adobe Photoshop',    initials: 'Ps', color: '#31A8FF' },
-        { name: 'ChatGPT',            initials: 'Gp', color: '#10A37F' },
-        { name: 'Google AI Studio',   initials: 'Ga', color: '#1A73E8' }
-      ],
-      secondary: [
-        {
-          label: 'Additional creative tools',
-          tools: [
-            { name: 'Adobe Premiere Pro', initials: 'Pr', color: '#00005B' },
-            { name: 'CapCut',             initials: 'Cc', color: '#000000' }
-          ]
-        },
-        {
-          label: 'Additional AI tools',
-          tools: [
-            { name: 'Claude',             initials: 'Cl', color: '#D97757' },
-            { name: 'Google Gemini',      initials: 'Ge', color: '#8E75B2' },
-            { name: 'Microsoft Copilot',  initials: 'Cp', color: '#185ABD' }
-          ]
-        }
+        { name: 'Canva',            initials: 'Cv', color: '#00C4CC' },
+        { name: 'Adobe Photoshop',  initials: 'Ps', color: '#31A8FF' },
+        { name: 'ChatGPT',          initials: 'Gp', color: '#10A37F' },
+        { name: 'Google AI Studio', initials: 'Ga', color: '#1A73E8' }
+      ]
+    },
+    {
+      group: 'Additional tools',
+      tools: [
+        { name: 'Amazon Seller Central', initials: 'Am', color: '#232F3E' },
+        { name: 'Walmart Marketplace',   initials: 'Wm', color: '#0071CE' },
+        { name: 'Shopee',                initials: 'Sp', color: '#EE4D2D' },
+        { name: 'Lazada',                initials: 'Lz', color: '#0F146D' },
+        { name: 'HubSpot CRM',            initials: 'Hs', color: '#FF7A59' },
+        { name: 'Zoom',                   initials: 'Zm', color: '#2D8CFF' },
+        { name: 'Mailchimp',              initials: 'Mc', color: '#FFE01B', dark: true },
+        { name: 'Adobe Premiere Pro',     initials: 'Pr', color: '#00005B' },
+        { name: 'CapCut',                 initials: 'Cc', color: '#000000' },
+        { name: 'Claude',                 initials: 'Cl', color: '#D97757' },
+        { name: 'Google Gemini',          initials: 'Ge', color: '#8E75B2' },
+        { name: 'Microsoft Copilot',      initials: 'Cp', color: '#185ABD' }
       ]
     }
   ];
@@ -112,7 +91,7 @@
     const textColor = t.dark ? 'color:#1F2A24;' : '';
     const liClass = compact ? 'tool-pill tool-pill-compact' : 'tool-pill';
     return '<li class="' + liClass + '">' +
-             '<span class="badge" style="background:' + t.color + ';' + textColor + '" aria-hidden="true">' +
+             '<span class="badge brand-mark" style="background:' + t.color + ';' + textColor + '" aria-hidden="true">' +
                escapeHtml(t.initials) +
              '</span>' +
              '<span class="label">' + escapeHtml(t.name) + '</span>' +
@@ -120,7 +99,7 @@
   }
 
   function buildToolGroups(data) {
-    return data.map(function (group) {
+    return data.map(function (group, index) {
       const pills = group.tools.map(function (t) { return buildPill(t, false); }).join('');
 
       const secondaryHtml = (group.secondary || []).map(function (sub) {
@@ -131,7 +110,7 @@
                '</div>';
       }).join('');
 
-      return '<div class="tool-group">' +
+      return '<div class="tool-group tool-group-' + (index + 1) + '" data-tool-group="' + escapeHtml(group.group) + '" data-reveal style="--reveal-delay:' + (index * 90) + 'ms">' +
                '<h3>' + escapeHtml(group.group) + '</h3>' +
                '<ul class="tool-row">' + pills + '</ul>' +
                secondaryHtml +
@@ -180,17 +159,108 @@
     // Reset when resizing back up to desktop
     window.addEventListener('resize', function () {
       if (window.innerWidth > 860 && nav.classList.contains('open')) setNav(false);
+      if (window.innerWidth > 860) setWorkDropdown(false);
     });
   }
 
   /* -------------------------------------------------------
-     3. Additional technical skills disclosure
+     3. Work dropdown (desktop hover / mobile accordion)
+     Desktop opens on hover/focus; click, Escape and outside-click
+     remain supported. Mobile stays click/accordion driven.
+     ------------------------------------------------------- */
+
+  const workToggle = document.getElementById('workDropdownToggle');
+  const workMenu = document.getElementById('workDropdownMenu');
+  const workItem = workToggle ? workToggle.closest('.nav-item-dropdown') : null;
+
+  function setWorkDropdown(open) {
+    if (!workItem || !workToggle) return;
+    workItem.classList.toggle('open', open);
+    workToggle.setAttribute('aria-expanded', String(open));
+  }
+
+  if (workToggle && workMenu && workItem) {
+    workToggle.addEventListener('click', function () {
+      setWorkDropdown(workToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Desktop hover: keep aria-expanded in sync for assistive technology.
+    // CSS handles the visual opening; mobile remains click-driven.
+    if (window.matchMedia('(min-width: 861px)').matches) {
+      workItem.addEventListener('mouseenter', function () { setWorkDropdown(true); });
+      workItem.addEventListener('mouseleave', function () { setWorkDropdown(false); });
+    }
+
+    // Close (but still navigate) once a submenu destination is chosen.
+    workMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { setWorkDropdown(false); });
+    });
+
+    // Escape closes the dropdown and returns focus to the toggle.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && workToggle.getAttribute('aria-expanded') === 'true') {
+        setWorkDropdown(false);
+        workToggle.focus();
+      }
+    });
+
+    // Click outside the dropdown closes it.
+    document.addEventListener('click', function (e) {
+      if (workToggle.getAttribute('aria-expanded') !== 'true') return;
+      if (!workItem.contains(e.target)) setWorkDropdown(false);
+    });
+  }
+
+  /* -------------------------------------------------------
+     4. Storefront horizontal scroller
+     User-controlled only — no auto-advance. Each
+     .store-scroll-wrap gets its own prev/next buttons that
+     scroll by roughly one card-width; buttons disable at the
+     start/end of their own track. Touch/trackpad scrolling
+     works natively via overflow-x regardless of JS.
+     ------------------------------------------------------- */
+
+  document.querySelectorAll('.store-scroll-wrap').forEach(function (wrap) {
+    const track = wrap.querySelector('.store-scroll');
+    const prevBtn = wrap.querySelector('.store-scroll-prev');
+    const nextBtn = wrap.querySelector('.store-scroll-next');
+    if (!track) return;
+
+    function updateButtons() {
+      const max = track.scrollWidth - track.clientWidth;
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 4;
+    }
+
+    function scrollByCard(direction) {
+      const card = track.querySelector('.store-card');
+      const amount = card ? card.getBoundingClientRect().width + 20 : track.clientWidth * 0.8;
+      track.scrollBy({
+        left: amount * direction,
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { scrollByCard(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { scrollByCard(1); });
+
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  });
+
+  /* -------------------------------------------------------
+     5. Additional technical skills disclosure
      ------------------------------------------------------- */
 
   const techToggle = document.getElementById('techToggle');
   const techPanel = document.getElementById('techPanel');
 
   if (techToggle && techPanel) {
+    // Always start collapsed unless the markup explicitly says otherwise.
+    techToggle.setAttribute('aria-expanded', 'false');
+    techPanel.hidden = true;
+
     techToggle.addEventListener('click', function () {
       const open = techToggle.getAttribute('aria-expanded') === 'true';
       techToggle.setAttribute('aria-expanded', String(!open));
@@ -199,10 +269,14 @@
   }
 
   /* -------------------------------------------------------
-     4. Scroll-spy — only for sections the nav points to
+     6. Scroll-spy — only for sections the nav points to
+     Includes the Work dropdown's submenu links; the "Work"
+     toggle itself lights up whenever any of its three
+     sections is the one in view.
      ------------------------------------------------------- */
 
-  const navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+  const navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link, .nav-dropdown-link'));
+  const workSectionIds = ['case-studies', 'storefronts', 'work-samples'];
 
   const watched = navLinks
     .map(function (link) {
@@ -219,6 +293,9 @@
         navLinks.forEach(function (link) {
           link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
+        if (workToggle) {
+          workToggle.classList.toggle('active', workSectionIds.indexOf(id) !== -1);
+        }
       });
     }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
@@ -226,9 +303,14 @@
   }
 
   /* -------------------------------------------------------
-     5. Brand logo fallback
-     If a CDN icon fails, swap in a text badge instead of
-     showing a broken image.
+     7. Image fallbacks
+     If a CDN store-logo icon fails, swap in a text badge
+     instead of showing a broken image. If the About-section
+     photo fails to load (wrong filename, case mismatch, or
+     asset missing on the deployed host), fall back to the
+     hero profile photo — a real asset already used elsewhere
+     on the page — rather than showing a broken-image icon
+     with only alt text visible.
      ------------------------------------------------------- */
 
   document.querySelectorAll('img.store-logo').forEach(function (img) {
@@ -245,9 +327,18 @@
     });
   });
 
+  const aboutPhoto = document.querySelector('.about-photo img.profile-photo');
+  if (aboutPhoto) {
+    aboutPhoto.addEventListener('error', function () {
+      if (aboutPhoto.dataset.fallbackApplied) return;
+      aboutPhoto.dataset.fallbackApplied = 'true';
+      aboutPhoto.src = 'assets/profile.png';
+    });
+  }
+
 
   /* -------------------------------------------------------
-     6. Work-sample lightbox
+     8. Work-sample lightbox
      Progressive enhancement: the original href remains a valid fallback.
      Smooth opening/closing animation stays on-page and respects reduced motion.
      ------------------------------------------------------- */
@@ -512,5 +603,55 @@
       lastLightboxTrigger = null;
     });
   }
+
+  /* -------------------------------------------------------
+     9. Reveal-on-scroll + hero entrance motion
+     Reuses the reducedMotionQuery/prefersReducedMotion() from
+     the lightbox above. Hero elements (marked with
+     [data-reveal-hero]) reveal shortly after load since they're
+     already on-screen; everything else reveals once via a
+     dedicated IntersectionObserver the first time it enters the
+     viewport. Purely additive — no existing behavior changes.
+     ------------------------------------------------------- */
+
+  (function initReveal() {
+    const revealEls = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (!revealEls.length) return;
+
+    // Reduced motion: CSS already forces the visible end-state,
+    // so there's nothing for JS to do here.
+    if (prefersReducedMotion()) return;
+
+    const heroEls = revealEls.filter(function (el) { return el.hasAttribute('data-reveal-hero'); });
+    const scrollEls = revealEls.filter(function (el) { return !el.hasAttribute('data-reveal-hero'); });
+
+    // Hero content is already in the viewport on load, so it gets
+    // a short timeout-based reveal instead of waiting on an
+    // observer that may not fire for already-visible elements.
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        heroEls.forEach(function (el) { el.classList.add('is-revealed'); });
+      });
+    });
+
+    if (!scrollEls.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      // No observer support: show everything immediately rather
+      // than leaving content permanently hidden.
+      scrollEls.forEach(function (el) { el.classList.add('is-revealed'); });
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    scrollEls.forEach(function (el) { revealObserver.observe(el); });
+  })();
 
 })();
