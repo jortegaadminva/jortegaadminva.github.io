@@ -42,7 +42,7 @@
 <!-- Cache-busting: bump ?v=X.X on styles.css and script.js together (e.g. 1.1 -> 1.2)
      whenever a CSS/JS change is deployed, so GitHub Pages / browsers fetch the new files
      instead of a cached copy. Keep both files on the same version number. -->
-<link rel="stylesheet" href="styles.css?v=3.3">
+<link rel="stylesheet" href="styles.css?v=3.5">
 
 <!-- Structured data: only facts present in the resumes / site -->
 <script type="application/ld+json">
@@ -1297,17 +1297,26 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <div>
+    <div class="footer-brand">
       <p class="footer-name">Johnny M. Ortega Jr.</p>
-      <p class="footer-role">E-Commerce &amp; Operations Support &middot; IT Support</p>
+      <p class="footer-role">E-Commerce &amp; Operations Support &middot; IT Background</p>
     </div>
-    <div class="footer-meta">
-      <span>📍 Philippines</span>
-      <a href="mailto:jortega.adminva@gmail.com">jortega.adminva@gmail.com</a>
-      <span class="footer-available">🟢 Available for remote work worldwide</span>
+
+    <div class="footer-meta" aria-label="Contact and availability">
+      <span class="footer-meta-item footer-location"><span class="footer-icon" aria-hidden="true">📍</span> Philippines</span>
+      <a class="footer-meta-item footer-email" href="mailto:jortega.adminva@gmail.com"><span class="footer-icon" aria-hidden="true">✉️</span> jortega.adminva@gmail.com</a>
+      <span class="footer-meta-item footer-available">
+        <span class="availability-dot" aria-hidden="true"></span>
+        Available for remote work worldwide
+      </span>
     </div>
   </div>
-  <p class="footer-copy">Supporting international clients remotely since 2018 · © 2026 Johnny M. Ortega Jr.</p>
+
+  <p class="footer-copy">
+    <span>Supporting international clients remotely since 2018</span>
+    <span class="footer-copy-divider" aria-hidden="true">&middot;</span>
+    <span>&copy; 2026 Johnny M. Ortega Jr.</span>
+  </p>
 </footer>
 
 
@@ -1342,6 +1351,6 @@
   </div>
 </dialog>
 
-<script src="script.js?v=3.3" defer></script>
+<script src="script.js?v=3.5" defer></script>
 </body>
 </html>
